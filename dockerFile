@@ -1,11 +1,15 @@
-FROM node:latest
+FROM node:18-alpine
 
-WORKDIR /app
+WORKDIR /daily-mood-tracker/
 
-COPY . /app
+# First, copy only package.json and package-lock.json
+COPY package*.json ./
 
+# Install dependencies
+RUN npm install --force
 
-RUN npm install
+# Then, copy the rest of your application code
+COPY . .
 
 EXPOSE 3000
 
